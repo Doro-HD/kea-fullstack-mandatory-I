@@ -1,76 +1,49 @@
 let autoIncrementValue = 1
+const articles = []
+
+function addArticle(article) {
+  article.id = autoIncrement()
+  articles.push(article)
+}
 
 function autoIncrement() {
   return autoIncrementValue++  
 }
 
-export default [
+addArticle({
+  topic: 'API',
+  title: 'API route order',
+  summary: 'API route naming convention and how to order your routes',
+  content: [
     {
-      id: autoIncrement(),
-      topic: "API",
-      title: "API route order",
-      summary: "OpenAPI has created a specification for how to order one's api routes",
-      content: [
-        {
-          type: 'paragraf',
-          text: "this is a test"
-        },
-        {
-          type: 'code',
-          text: "function test() {\n\tconst id = 1\n}"
-        }
-      ]
+      type: 'paragraf',
+      text: 'Having a good convention for not only how to name your API routes but also how to order them makes the developer experience a much smoother ride'
     },
     {
-      id: autoIncrement(),
-      title: "test",
-      summary: "test",
-      content: [
-        {
-          paragraf: "this is a test"
-        },
-        {
-          code: "const id = 1"
-        }
-      ]
+      type: 'paragraf',
+      text: 'When designing your api you usually have some form of resource, eg. customers, birds. ' +
+            'To make it simple and clean one could define their API routes like so. start by naming the route after the resource, ' +
+            'lower case and in plural. Start by defining the get routes, then post, then put and finally delete. If you have routes with the same method ' +
+            'then order them so that the ones without path variables are at the bottom.'
     },
     {
-      id: autoIncrement(),
-      title: "test",
-      summary: "test",
-      content: [
-        {
-          paragraf: "this is a test"
-        },
-        {
-          code: "const id = 1"
-        }
-      ]
+      type: 'paragraf',
+      text: 'Take the following example'
     },
     {
-      id: autoIncrement(),
-      title: "test",
-      summary: "test",
-      content: [
-        {
-          paragraf: "this is a test"
-        },
-        {
-          code: "const id = 1"
-        }
-      ]
+      type: 'code',
+      text: 'get: /birds\n' +
+            'get: /birds/<id>\n' +
+            'post: /birds\n' +
+            'put: /birds/<id>\n' +
+            'delete: /birds/<id>'
     },
     {
-      id: autoIncrement(),
-      title: "test",
-      summary: "test",
-      content: [
-        {
-          paragraf: "this is a test"
-        },
-        {
-          code: "const id = 1"
-        }
-      ]
-    },
+      type: 'paragraf',
+      text: 'However, when I designed my API for our birds assignment, I used a tool designed by swagger for documenting API\'s which enforced a slightly different aproach. ' +
+            ''
+    }
   ]
+})
+
+export default articles

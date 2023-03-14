@@ -5,17 +5,13 @@ body(class='bg-body-secondary')
 	div(class='container')
 		h1(class='display-1 text-center')= article.title
 		each element in article.content
-			case element.type
-				when 'paragraf'
-					div(class='row')
-						div(class='col-4')
-						div(class='col-4')
+			div(class='row')
+				div(class='col')
+				div(class='col-6')
+					case element.type
+						when 'paragraf'
 							p(class='fs-5')= element.text
-						div(class='col-4')
-				when 'code'
-					div(class='row')
-						div(class='col-4')
-						div(class='col-4')
+						when 'code'
 							pre(class='text-bg-dark fs-5 font-monospace')= element.text
-						div(class='col-4')
+				div(class='col')
 						
