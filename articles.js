@@ -36,12 +36,57 @@ addArticle({
             'get: /birds/<id>\n' +
             'post: /birds\n' +
             'put: /birds/<id>\n' +
+            'patch: /birds/<id>\n' +
             'delete: /birds/<id>'
     },
     {
       type: 'paragraf',
-      text: 'However, when I designed my API for our birds assignment, I used a tool designed by swagger for documenting API\'s which enforced a slightly different aproach. ' +
-            ''
+      text: 'However, when I designed my API for our birds assignment, I used a tool designed by swagger for documenting API\'s which enforced a slightly different aproach.'
+    },
+    {
+      type: 'heading',
+      text: 'SwaggerHub route ordering'
+    },
+    {
+      type: 'paragraf',
+      text: 'SwaggerHub is a web application that allows developers to create documentation for their API\'s via a yaml file they write in the browser. Defining routes in this yaml file is quite easy, see the below example.'
+    },
+    {
+      type: 'code',
+      text: 'paths:\n' +
+            '  /birds:\n' +
+            '    get:\n' +
+            '      responses:\n' +
+            '        200:\n' +
+            '          ...\n' +
+            '    post:\n' +
+            '      ...'
+    },
+    {
+      type: 'paragraf',
+      text: 'On SwaggerHub routes, or paths, are defined before the method, meaning that the route order mentioned in the beginning of this article is not possible. See the example below or the provided link for the ordering enforced by SwaggerHub.'
+    },
+    {
+      type: 'link',
+      text: 'API documentation made with Swagger hub',
+      url: 'https://app.swaggerhub.com/apis-docs/Doro-HD/Birds_API/1.0.0'
+    },
+    {
+      type: 'code',
+      text: 'get: /birds\n' +
+            'post: /birds\n' +
+            'get: /birds/<id>\n' +
+            'put: /birds/<id>\n' +
+            'patch: /birds/<id>\n' +
+            'delete: /birds/<id>'
+    },
+    {
+      type: 'heading',
+      text: 'Conclusion'
+    },
+    {
+      type: 'paragraf',
+      text: 'No matter the ordering used, the importance as I have come to understand it is that the team designing the API and the end users can easily navigate the documentation and understand the workins of the API.'
     }
   ]
 })
