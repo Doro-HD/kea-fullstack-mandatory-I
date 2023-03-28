@@ -1,0 +1,17 @@
+extends layout.pug
+block content
+	div(class='row')
+		div(class='col')
+		div(class='col-6')
+			form(action='article' method='post')
+				div(class='mb-3')
+					label(for='select1' class='form-label') Type
+					select(id='select1' class='form-select' aria-label='Default select example')
+						option(value='heading') Heading
+						option(value='paragraf') Paragraf
+						option(value='code') Code
+						option(value='link') Link
+				div(class='mb-3')
+					label(for='textarea1' class='form-label') Text
+					textarea(id='textarea1' class='form-control' row=3)
+		div(class='col')

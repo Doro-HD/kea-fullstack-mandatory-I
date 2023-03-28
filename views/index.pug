@@ -1,23 +1,15 @@
-doctype html
-html
-	head
-		include includes/bootstrap
-		title Mandatory 1
+extends layout.pug
+block content
+	div(class='container text-center')
+		h1(class='display-1') Topics
 
-	body(class='bg-body-secondary')
-		header
-			include includes/navbar
-	
-		div(class='container text-center')
-			h1(class='display-1') Topics
+		div(class='row row-cols-4')
+			each article in articles
+				div(class='col mb-3')
+					div(class='card text-bg-secondary')
+						div(class='card-body')
+							h3(class='card-title')= article.title
+							p(class='card-text')= article.summary
 
-			div(class='row row-cols-4')
-				each article in articles
-					div(class='col mb-3')
-						div(class='card text-bg-secondary')
-							div(class='card-body')
-								h3(class='card-title')= article.title
-								p(class='card-text')= article.summary
-
-								a(class='card-link link-light' href='/articles/' + article.id) Read more
+							a(class='card-link link-light' href='/articles/' + article.id) Read more
 
