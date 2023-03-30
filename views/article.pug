@@ -1,8 +1,8 @@
 extends layout.pug
 
 block content
-	h1(class='display-1 text-center')= article.title
-	each element in article.content
+	h1(class='display-1 text-center')= title
+	each element in articleBlocks
 		div(class='row')
 			div(class='col')
 			div(class='col-6')

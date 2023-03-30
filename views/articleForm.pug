@@ -3,15 +3,20 @@ block content
 	div(class='row')
 		div(class='col')
 		div(class='col-6')
-			form(action='article' method='post')
+			form(action='/admin/article' method='post')
 				div(class='mb-3')
 					label(for='select1' class='form-label') Type
-					select(id='select1' class='form-select' aria-label='Default select example')
+					select(id='select1' name='select1' class='form-select' aria-label='Default select example')
 						option(value='heading') Heading
 						option(value='paragraf') Paragraf
 						option(value='code') Code
 						option(value='link') Link
 				div(class='mb-3')
+					label(for='url1' class='form-label') URL, only if type is link
+					input(id='url1' name='url1' class='form-control')
+				div(class='mb-3')
 					label(for='textarea1' class='form-label') Text
-					textarea(id='textarea1' class='form-control' row=3)
+					textarea(id='textarea1' name='textarea1' class='form-control' row=3)
+				div(class='mb-3')
+					button(type='submit' class='btn btn-outline-secondary') Submit
 		div(class='col')

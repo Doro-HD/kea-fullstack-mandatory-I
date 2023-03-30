@@ -2,9 +2,7 @@ import crossEnv from 'cross-env'
 import { createClient } from '@supabase/supabase-js'
 import express from 'express'
 import cookieParser from 'cookie-parser'
-import articles from './articles.js'
 
-// Create a single supabase client for interacting with your database
 const supabase = createClient('https://kfivnxsczsonvtyfufyb.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtmaXZueHNjenNvbnZ0eWZ1ZnliIiwicm9sZSI6ImFub24iLCJpYXQiOjE2Nzk5MDk2MTEsImV4cCI6MTk5NTQ4NTYxMX0.MMIe_FkIsO8K8zo9Q69yHw8V4VRARk4KpzjakXGJk3s')
 
 const app = express()
@@ -15,19 +13,31 @@ app.use(express.static('public'))
 
 app.set('view engine', 'pug')
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   const cookies = req.cookies
+  const { data: articles, error }= await supabase
+    .from('article')
+    .select('*')
   const articlesSummarized = articles.map(article => ({ id: article.id, title: article.title, summary: article.summary }))
 
   res.render('index', { articles: articlesSummarized, user: cookies.username })
 })
 
-app.get('/articles/:id', (req, res) => {
+app.get('/articles/:id', async (req, res) => {
   const cookies = req.cookies
   const id = Number(req.params.id)
-  const article = articles.find(article => article.id === id)
+
+  const { data: article, error } = await supabase
+    .from('article')
+    .select('id, title, block(*)')
+    .eq('id', id)
+    .single()
   
-  res.render('article', { article: article, user: cookies.username })
+  res.render('article', { 
+      title: article.title,
+      articleBlocks: article.block,
+      user: cookies.username 
+    })
 })
 
 
@@ -76,7 +86,19 @@ app.get('/admin/article', (req, res) => {
     return
   }
 
-  res.render('articleForm')
+  res.render('articleForm', { user: cookies.username })
+})
+
+app.post('/admin/article', (req, res) => {
+  const cookies = req.cookies
+  if (!cookies.username) {
+    res.redirect('/')
+  }
+
+  const body = req.body
+  console.log(body)
+  
+  res.redirect('/admin/article')
 })
 
 const port = process.env.PORT || 8080 
