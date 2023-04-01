@@ -18,6 +18,7 @@ app.get('/', async (req, res) => {
   const { data: articles, error }= await supabase
     .from('article')
     .select('*')
+    .order('id')
   const articlesSummarized = articles.map(article => ({ id: article.id, title: article.title, summary: article.summary }))
 
   res.render('index', { articles: articlesSummarized, user: cookies.username })
@@ -30,8 +31,15 @@ app.get('/articles/:id', async (req, res) => {
   const { data: article, error } = await supabase
     .from('article')
     .select('id, title, block(*)')
+    .order('id', { foreignTable: 'block'} )
     .eq('id', id)
     .single()
+
+  if (!article) {
+    res.redirect('/')
+
+    return
+  }
   
   res.render('article', { 
       title: article.title,
