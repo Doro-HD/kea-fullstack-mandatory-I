@@ -32,6 +32,12 @@ app.get('/articles/:id', async (req, res) => {
     .select('id, title, block(*)')
     .eq('id', id)
     .single()
+
+  if (!article) {
+    res.redirect('/')
+
+    return
+  }
   
   res.render('article', { 
       title: article.title,
