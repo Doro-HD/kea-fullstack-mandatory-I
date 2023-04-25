@@ -31,6 +31,7 @@ app.get('/articles/:id', async (req, res) => {
   const { data: article, error } = await supabase
     .from('article')
     .select('id, title, block(*)')
+    .order('id', { foreignTable: 'block'} )
     .eq('id', id)
     .single()
 
