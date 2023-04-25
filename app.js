@@ -18,6 +18,7 @@ app.get('/', async (req, res) => {
   const { data: articles, error }= await supabase
     .from('article')
     .select('*')
+    .order('id')
   const articlesSummarized = articles.map(article => ({ id: article.id, title: article.title, summary: article.summary }))
 
   res.render('index', { articles: articlesSummarized, user: cookies.username })
